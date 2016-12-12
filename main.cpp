@@ -3,9 +3,15 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
 
-// global variables #uglycode
+// I am going to hate myself for this coding style...
+
+// global variables
 std::string app_name = "Vulkan Voodoo Wonderland";
+int app_width = 500;
+int app_height = 500;
+GLFWwindow* window;
 
 // declarations
 void initGLFW();
@@ -15,14 +21,22 @@ void mainLoop();
 // definitions
 void initGLFW() {
   std::cout << "initializing GLFW" << std::endl;
+  glfwInit();
+
+  glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+  glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+
+  window = glfwCreateWindow(app_width, app_height, app_name.c_str(), nullptr, nullptr);
 }
 
 void initVulkan() {
   std::cout << "initializing Vulkan" << std::endl;
+
 }
 
 void mainLoop() {
-  for(int i=0; i<10000; i++) {
+  while (!glfwWindowShouldClose(window)) {
+    glfwPollEvents();
     std::cout << "main loop" << std::endl;
   }
 }
